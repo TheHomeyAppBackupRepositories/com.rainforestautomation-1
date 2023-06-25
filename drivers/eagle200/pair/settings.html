@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="/assets/styles/bootstrap.min.css">
+
+<script type="text/javascript">
+    /**
+     * 2. Settings Page
+     *
+     * Settings required from the user in order to connect to the EAGLE-200 and discover connected devices.
+     */
+    Homey.setTitle(__('pair.settings.title'));
+
+
+    $(function () {
+
+        Homey.emit("get_ip-address").then(function (result) {
+            $('#ip-address').val(result);
+        });
+
+        $('#settings-continue').on('click', function () {
+            if ($('#settings-form')[0].checkValidity()) {
+
+                let data = {
+                    ipAddress: $('#ip-address').val(),
+                    cloudId: $('#cloud-id').val(),
+                    installCode: $('#install-code').val(),
+                    macAddress: $('#mac-address').val(),
+                };
+
+                Homey.emit('save_settings', data).then(function (result) {
+                    if (result) {
+                        Homey.showView("list_devices");
+                    } else {
+                        Homey.alert('Unable to connect with the values supplied', 'error');
+                    }
+                });
+            } else {
+                $('#settings-form').addClass('was-validated');
+            }
+            return false;
+        });
+    });
+</script>
+
+<main class="container">
+    <section id="settings">
+        <div class="row">
+            <div class="col-12"><p data-i18n="pair.settings.description">Please enter the eagle-200 information and
+                click next to discover your connected devices.</p></div>
+            <div class="col-12">
+                <form id="settings-form">
+
+                    <div class="form-group form-row">
+                        <label for="ip-address" class="col-form-label col-4" data-i18n="pair.settings.ip-address.label">IP
+                            Address</label>
+                        <input id="ip-address" type="text" required
+                               pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$"
+                               placeholder="192.168.0.15" class="form-control col-8">
+                        <div class="text-right invalid-feedback" data-i18n="pair.settings.ip-address.invalid">
+                            Please enter a valid ip address.
+                        </div>
+                        <div class="text-right valid-feedback" data-i18n="pair.settings.ip-address.valid">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="form-group form-row">
+                        <label for="cloud-id" class="col-4" data-i18n="pair.settings.cloud-id.label">Cloud ID</label>
+                        <input id="cloud-id" type="text" required pattern="^([0-9A-Fa-f]{6})$"
+                               class="form-control col-8" placeholder="123456" value="">
+                        <div class="text-right invalid-feedback" data-i18n="pair.settings.cloud-id.invalid">
+                            Please enter the 6 digit numeric Cloud ID.
+                        </div>
+                        <div class="text-right valid-feedback" data-i18n="pair.settings.cloud-id.valid">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="form-group form-row">
+                        <label for="mac-address" class=" col-4 col-form-label"
+                               data-i18n="pair.settings.mac-address.label">MAC Address</label>
+                        <input id="mac-address" type="text" required pattern="^([0-9A-Fa-f]{16})$"
+                               class="form-control col-8" placeholder="d8d5b90000000000" value="">
+                        <div class="text-right invalid-feedback" data-i18n="pair.settings.mac-address.invalid">
+                            Please enter the mac address without any spaces or dashes '-'.
+                        </div>
+                        <div class="text-right valid-feedback" data-i18n="pair.settings.mac-address.valid">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="form-group form-row">
+                        <label for="install-code" class="col-form-label col-4"
+                               data-i18n="pair.settings.install-code.label">Install Code</label>
+                        <input id="install-code" type="text" required pattern="^([0-9A-Fa-f]{16})$"
+                               class="form-control col-8" placeholder="e80f63cda5320a3d" value="">
+                        <div class="text-right invalid-feedback" data-i18n="pair.settings.install-code.invalid">
+                            Please enter the install code without any spaces or dashes '-'.
+                        </div>
+                        <div class="text-right valid-feedback" data-i18n="pair.settings.install-code.valid">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div id="hy-nav" class="visible">
+                        <button id="settings-continue" class="hy-button visible"><span>Continue</span></button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+</main>

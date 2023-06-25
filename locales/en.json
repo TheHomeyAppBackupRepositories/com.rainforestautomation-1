@@ -1,0 +1,37 @@
+{
+  "pair": {
+    "start" : {
+      "title" : "Eagle Gateway Instructions",
+      "description": "Before pairing a device first you will need the following to connect to your gateway:",
+      "prerequisites" : {
+        "setup": "You have set up your EAGLE gateway as per the manufactures instructions.",
+        "ip": "The static IP address of the EAGLE gateway which have assigned using your router.",
+        "id": "You will need the three numbers indicated below which are located on the underside of the EAGLE gateway."
+      }
+    },
+    "settings": {
+      "title" : "EAGLE Gateway Settings",
+      "description": "Please enter the following gateway information and click next to connect and discover your devices",
+      "ip-address": {
+        "label": "IP Address",
+        "invalid": "Please enter a valid ip address.",
+        "valid": "Looks good!"
+      },
+      "cloud-id": {
+        "label": "Cloud ID",
+        "invalid": "Please enter the 6 digit numeric Cloud ID.",
+        "valid": "Looks good!"
+      },
+      "mac-address": {
+        "label": "MAC Address",
+        "invalid": "Please enter the mac address without any spaces or dashes '-'.",
+        "valid": "Looks good!"
+      },
+      "install-code": {
+        "label": "Install Code",
+        "invalid": "Please enter the install code without any spaces or dashes '-'.",
+        "valid": "Looks good!"
+      }
+    }
+  }
+}

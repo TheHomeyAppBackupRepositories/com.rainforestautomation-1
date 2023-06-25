@@ -1,0 +1,21 @@
+{
+  "name": "com.rainforestautomation",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
+  },
+  "devDependencies": {
+    "@tsconfig/node12": "^1.0.11",
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.1",
+    "@types/node": "^18.11.0",
+    "eslint": "^7.32.0",
+    "eslint-config-athom": "^3.1.1"
+  },
+  "dependencies": {
+    "homey-log": "^2.1.0",
+    "phin": "^2.9.1",
+    "sax": "^1.2.4",
+    "xml-js": "^1.6.7"
+  }
+}
